@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4682b4;
+        }
+        .project {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button, a {
+            margin-right: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        button {
+            background-color: #4682b4;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5f9ea0;
+        }
+        a {
+            background-color: #20b2aa;
+            text-decoration: none;
+        }
+        a:hover {
+            background-color: #3cb371;
+        }
+    </style>
+
+</head>
+<body>
+<a th:href="@{/logout}">Logout</a>
+
+<h1>Project Manager</h1>
+<a th:href="@{'/main/'+${userId}+'/new'}" class="button">Create New Project</a>
+
+<h2>All Projects</h2>
+<div th:each="project : ${projects}" class="project">
+    <h3 th:text="${project.name}"></h3>
+    <p th:text="${project.description}"></p>
+    <div class="buttons">
+        <button th:attr="onclick='toggleTasks(' + ${project.id} + ')'" th:id="'toggleTasks-' + ${project.id}">View Tasks</button>
+        <a th:href="@{'/main/' + ${userId} + '/' + ${project.id} + '/tasks/new'}" class="button">Add Task</a>
+        <a th:href="@{'/main/'  + ${userId} + '/' + ${project.id} + '/update'}">Update</a>
+        <form th:action="@{'/main/' + ${userId} + '/' + ${project.id} + '/delete'}" method="post" style="display:inline;">
+            <button type="submit">Delete</button>
+        </form>    </div>
+    <div th:id="'tasks-' + ${project.id}" style="display: none;">
+        <div th:each="task : ${project.tasks}" class="task">
+            <h4 th:text="${task.title}"></h4>
+            <p th:text="${task.description}"></p>
+            <p th:text="'Due Date: ' + (${task.dueDate} ?: 'N/A')"></p>
+            <div class="buttons">
+                <a th:href="@{'/main/' + ${userId} + '/' + ${project.id} + '/tasks/' + ${task.id} + '/update'}">Update</a>
+                <form th:action="@{'/main/' + ${userId} + '/' + ${project.id} + '/tasks/' + ${task.id} + '/delete'}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleTasks(projectId) {
+        const taskDiv = document.getElementById(`tasks-${projectId}`);
+        const button = document.getElementById(`toggleTasks-${projectId}`);
+        if (taskDiv.style.display === "none") {
+            taskDiv.style.display = "block";
+            button.innerText = "Hide Tasks";
+        } else {
+            taskDiv.style.display = "none";
+            button.innerText = "View Tasks";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #006400;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #006400;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #008000;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Update Project</h2>
+<form th:action="@{'/main/' + ${userId} + '/' + ${projectId} + '/update'}" method="post" class="form-container">
+    <label>Name:</label>
+    <input type="text" th:name="name" th:value="${name}" required>
+    <label>Description:</label>
+    <input th:name="description" th:value="${description}" required>
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>

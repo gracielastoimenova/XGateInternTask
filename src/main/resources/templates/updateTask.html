@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #4b0082;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6a0dad;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Update Task</h2>
+<form th:action="@{'/main/' + ${userId} + '/' + ${projectId} + '/tasks/' + ${taskId} + '/update'}" th:object="${task}" method="post" class="form-container">
+    <label>Title:</label>
+    <input type="text" th:name="title" th:value="${title}" required>
+    <label>Description:</label>
+    <textarea th:name="description" th:text="${description}" required></textarea>
+    <label>Due Date:</label>
+    <input type="date" th:name="dueDate" th:value="${dueDate}">
+    <button type="submit">Update Task</button>
+</form>
+
+</body>
+</html>

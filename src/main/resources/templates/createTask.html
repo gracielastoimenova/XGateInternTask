@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #006400;
+        }
+        form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #006400;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #008000;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h2>Create Task</h2>
+    <form th:action="@{'/main/' + ${userId} + '/' + ${projectId} + '/tasks/new'}" method="post">
+        <div th:if="${errorMessage}"  style="color: red;">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <label>Title:</label>
+        <input type="text" th:name="title" required>
+        <label>Description:</label>
+        <textarea th:name="description" required></textarea>
+        <label>Due Date:</label>
+        <input type="date" th:name="dueDate">
+        <button type="submit">Create Task</button>
+    </form>
+
+
+</body>
+</html>

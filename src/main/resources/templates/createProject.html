@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #4b0082;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 10px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6a0dad;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Create Project</h2>
+<form th:action="@{'/main/'+${userId}+'/new'}" method="POST" class="form-container">
+    <div th:if="${errorMessage}"  style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <label>Name:</label>
+    <input type="text" th:name="name" required>
+    <label>Description:</label>
+    <textarea th:name="description" required></textarea>
+    <button type="submit">Create</button>
+</form>
+
+</body>
+</html>

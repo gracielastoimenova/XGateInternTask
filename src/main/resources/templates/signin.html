@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #ff4500;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff6347;
+        }
+        .btn a {
+            text-decoration: none;
+            color: #ff4500;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Sign in</h2>
+    <div class="container-forms">
+        <div th:if="${errorMessage}"  style="color: red;">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <div class="container-form">
+            <form th:method="POST" th:action="@{/signin}">
+                <input th:name="email" placeholder="Email" type="email" required />
+                <input th:name="name" placeholder="Name" type="text" required />
+                <input th:name="password" placeholder="Password" type="password" required />
+                <button type="submit">Sign in</button>
+            </form>
+        </div>
+        <div class="container-info">
+            <p>Have an account?</p>
+            <div class="btn">
+                <a th:href="@{/login}">Log in</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
